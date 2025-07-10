@@ -1,14 +1,14 @@
-# 🧬 Transcriptomics Pipeline
+#  Transcriptomics Pipeline
 
 This repository contains a streamlined pipeline for processing and analyzing **Illumina short-read transcriptome data** from non-model organisms. It supports basic **quality control**, **read mapping**, and **expression analysis**, and is designed to integrate smoothly with genome annotation workflows.
 
 ---
 
-## 🧭 Overview
+##  Overview
 
 This pipeline is structured into two primary stages:
 
-### 🧼 Mapping Transcriptomes
+###  Mapping Transcriptomes
 
 Takes raw Illumina RNA-seq reads and:
 - Performs quality checks
@@ -22,7 +22,7 @@ These BAMs are especially useful for:
 
 ---
 
-### 📊 Gene Expression Estimation
+###  Gene Expression Estimation
 
 Quantifies expression using your **gene annotation file** (e.g., GFF3 or GTF) and the mapped reads.  
 You can:
