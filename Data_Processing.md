@@ -1,4 +1,4 @@
-# 🧬 Transcriptome Mapping Pipeline
+#  Transcriptome Mapping Pipeline
 
 This walkthrough covers the first step in processing short-read RNA-seq data: **quality checking, trimming, and mapping** to a reference genome.
 
