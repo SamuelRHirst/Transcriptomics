@@ -6,7 +6,7 @@ We assume you're working with **paired-end Illumina reads** from RNA-seq and wan
 
 ---
 
-## 📁 Step 1: Quality Check & Trimming
+##  Step 1: Quality Check & Trimming
 
 Before mapping reads, we need to:
 1. Check raw read quality
@@ -18,12 +18,12 @@ We'll use:
 
 ---
 
-📥 Input Files
+ Input Files
 sample_R1.fastq.gz — forward reads
 
 sample_R2.fastq.gz — reverse reads
 
-🧬 Run Trimming + QC
+ Run Trimming + QC
 
 ```bash
 trim_galore --paired sample_R1.fastq.gz sample_R2.fastq.gz --fastqc -o trimmed_reads/
@@ -39,7 +39,7 @@ Runs FastQC on both raw and trimmed reads
 
 Sends all output to the trimmed_reads/ directory
 
-📄 Output Files
+ Output Files
 In trimmed_reads/, you'll get:
 
 sample_R1_val_1.fq.gz — trimmed forward reads
@@ -50,9 +50,9 @@ FastQC reports (*.html) for both raw and trimmed reads
 
 Log files describing what was trimmed
 
-✅ These trimmed FASTQs will be used as input for mapping in the next step.
+ These trimmed FASTQs will be used as input for mapping in the next step.
 
-## 📍 Step 2: Mapping Reads to the Genome with HISAT2
+##  Step 2: Mapping Reads to the Genome with HISAT2
 
 After trimming, the next step is to **map the cleaned RNA-seq reads** to your genome assembly.
 
@@ -60,24 +60,24 @@ For this step, we’ll use:
 - [`HISAT2`](https://daehwankimlab.github.io/hisat2/) — a fast and splice-aware aligner
 - [`Samtools`](http://www.htslib.org/) — for sorting and indexing the output
 
-> 🎯 In this step, we're just generating **sorted BAM files** to use in genome annotation (e.g., with GeMoMa) or downstream visualization. No transcript quantification yet.
+>  In this step, we're just generating **sorted BAM files** to use in genome annotation (e.g., with GeMoMa) or downstream visualization. No transcript quantification yet.
 
 ---
 
-📥 Input Files
+ Input Files
 sample_R1_val_1.fq.gz — trimmed forward reads (from Trim Galore)
 
 sample_R2_val_2.fq.gz — trimmed reverse reads
 
 A HISAT2 genome index (must be pre-built)
 
-🛠️ Build HISAT2 Index (if needed)
+ Build HISAT2 Index (if needed)
 Only need to do this once per genome:
 
 ```bash
 hisat2-build your_genome.fasta your_genome_index
 ```
-🧬 Run Mapping
+ Run Mapping
 ```
 hisat2 -p 16 \
   -x your_genome_index \
@@ -95,7 +95,7 @@ Explanation:
 
 -S → output SAM file
 
-🔁 Convert to Sorted BAM
+ Convert to Sorted BAM
 
 ```BASH
 samtools view -b sample.sam > sample.bam
@@ -104,10 +104,10 @@ samtools index sample.sorted.bam
 ```
 I typically delete the .sam file at this point
 
-📄 Output Files
+ Output Files
 sample.sorted.bam — sorted alignments
 
 sample.sorted.bam.bai — BAM index
 
-✅ This BAM file is now ready for use in annotation pipelines, visualization in genome browsers, or expression quantification.
+ This BAM file is now ready for use in annotation pipelines, visualization in genome browsers, or expression quantification.
 
